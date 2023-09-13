@@ -1,0 +1,21 @@
+shell -$SHELL                                                                                                                                     
+shelltitle "> |bash"                                                                                                                              
+                                                                                                                                                  
+hardstatus on                                                                                                                                     
+hardstatus string "%h > %t"                                                                                                                       
+caption always "%{= wk} %-w%{= kW} %n %t %{-}%+w %= | %l"                                                                                         
+                                                                                                                                                  
+                                                                                                                                                  
+screen -t htop 0 nice htop -u $USER                                                                                                               
+screen 1                                                                                                                                          
+screen 2                                                                                                                                          
+select 1                                                                                                                                          
+                                                                                                                                                  
+autodetach on                                                                                                                                     
+startup_message off                                                                                                                               
+defscrollback 1000000                                                                                                                             
+                                                                                                                                                  
+bindkey "^[[1;2C" next                                                                                                                            
+bindkey "^[[1;2D" prev                                                                                                                            
+bindkey "^[[1;3C" bumpright                                                                                                                       
+bindkey "^[[1;3D" bumpleft
