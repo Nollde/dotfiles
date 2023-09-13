@@ -1,0 +1,6 @@
+export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/langs
+export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/tools
+export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/apps
+
+export PATH=/usr/local/cuda-11.2/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64:$LD_LIBRARY_PATH
