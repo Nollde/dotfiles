@@ -1,13 +1,6 @@
-# Alias for tensorflow activation
-alias activateTensorflow='source ~/tensorflow/bin/activate'
-
 # some more ls aliases
+alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
-# mount common repo 3a CMS
-alias mount_portal='sshfs noll@portal.physik.rwth-aachen.de:/home/home1/institut_3a/noll/Masterthesis/remote/common /home/dennis/Masterthesis/remote/common/common/'
-
-# mount user/noll machine lx3a53
-alias mount_user='sshfs lx3a53:/user/noll /home/dennis/lx3a53/noll'
+alias l.='ls -d .* --color=auto'
