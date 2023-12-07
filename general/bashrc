@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# beautiful prompt
+PS1='\[\e]0;\w\a\]\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]$(date +%H:%M:%S) \[\033[01;36m\]➤ \[\033[00m\]'
+
 #export LD_LIBRARY_PATH=$ROOTSYS/lib:$PYTHONDIR/lib:$LD_LIBRARY_PATH
 #export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
 #export PYTHONPATH="${PYTHONPATH}:/user/share/root"
