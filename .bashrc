@@ -2,10 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 source ~/.bash_aliases
-
-# beautiful prompt
-PS1='\[\e]0;\w\a\]\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]$(date +%H:%M:%S) \[\033[01;36m\]➤ \[\033[00m\]'
-
+source ~/.slurmrc
 
 export SVN_EDITOR=vim
 
@@ -42,42 +39,8 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='\[\e]0;\w\a\]\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]$(date +%H:%M:%S) \[\033[01;36m\]➤ \[\033[00m\]'
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+# colorful prompt
+PS1='\[\e]0;\w\a\]\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]$(date +%H:%M:%S) \[\033[01;36m\]> \[\033[00m\]'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -145,20 +108,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-if [[ $hostname == ml4hep* ]]; then
-    # To use Software Module Farm:
-    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/langs
-    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/tools
-    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/apps
-
-    # To use system locally installed cuda:
-    export PATH=/usr/local/cuda-11.2/bin:$PATH
-    export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64:$LD_LIBRARY_PATH
-
-    # activate conda
-    eval "$(/clusterfs/ml4hep_nvme2/bpnachman/anaconda3/bin/conda shell.bash hook)"
-fi
 
 if [[ $hostname =~ ^n[0-9]{4}$ ]]; then
     # activate on lawrencium
