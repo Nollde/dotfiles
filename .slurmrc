@@ -1,0 +1,2 @@
+alias skillall="squeue -u \$USER | awk '{print \$1}' | tail -n+2 | xargs scancel"
+alias shistory='sacct -u ${USER} --starttime $(date -d "-1 month" +%Y-%m-%d) --format=User,JobID,Jobname,partition,state,exitcode,time,start,end,elapsed,MaxRss,MaxVMSize,nnodes,ncpus,nodelist'
