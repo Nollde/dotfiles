@@ -1,3 +1,8 @@
+# make dotfiles command available everywhere
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+source ~/.bash_aliases
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -5,15 +10,6 @@
 # beautiful prompt
 PS1='\[\e]0;\w\a\]\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]$(date +%H:%M:%S) \[\033[01;36m\]➤ \[\033[00m\]'
 
-#export LD_LIBRARY_PATH=$ROOTSYS/lib:$PYTHONDIR/lib:$LD_LIBRARY_PATH
-#export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
-#export PYTHONPATH="${PYTHONPATH}:/user/share/root"
-# source /usr/lib/root-5.34.34/bin/thisroot.sh
-
-#export GUROBI_HOME="/opt/gurobi652/linux64"
-#export PATH="${PATH}:${GUROBI_HOME}/bin"
-#export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
-#export LD_LIBRARY_PATH="/home/dennis/anaconda2/lib"
 
 export SVN_EDITOR=vim
 
@@ -103,5 +99,18 @@ fi
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# added by Anaconda2 4.2.0 installer
-export PATH="/home/dennis/anaconda2/bin:$PATH"
+hostname=$(hostname)
+
+if [[ $hostname == ml4hep* ]]; then
+    # To use Software Module Farm:
+    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/langs
+    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/tools
+    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/apps
+
+    # To use system locally installed cuda:
+    export PATH=/usr/local/cuda-11.2/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64:$LD_LIBRARY_PATH
+
+    # activate conda
+    eval "$(/clusterfs/ml4hep_nvme2/bpnachman/anaconda3/bin/conda shell.bash hook)"
+fi

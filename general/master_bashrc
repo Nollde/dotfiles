@@ -1,1 +1,0 @@
-for f in ~/.dot; do source $f; done
