@@ -160,5 +160,7 @@ if [[ $hostname == ml4hep* ]]; then
     eval "$(/clusterfs/ml4hep_nvme2/bpnachman/anaconda3/bin/conda shell.bash hook)"
 fi
 
-# activate on lawrencium
-# eval "$(/global/home/users/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
+if [[ $hostname =~ ^n[0-9]{4}$ ]]; then
+    # activate on lawrencium
+    eval "$(/global/home/users/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
+fi
