@@ -29,7 +29,7 @@ dotfiles checkout
 
 Do not show untracked files (everything else in the `$HOME` directory)
 ```bash
-config config --local status.showUntrackedFiles no
+dotfiles config --local status.showUntrackedFiles no
 ```
 
 ## Use
