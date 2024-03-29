@@ -107,4 +107,4 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # source zsh functions
-source ~/.dot/functions
+source ~/.bash_aliases
