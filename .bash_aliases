@@ -34,6 +34,6 @@ work_recast_demo () {
 }
 work_haxad () {
     module load python
-    conda activate permutterdnoll
+    conda activate perlmutterdnoll
     cd ~/projects/anomaly_detection/atlas_analysis_new/code/haxad_demonstrator
 }
