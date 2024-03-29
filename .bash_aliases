@@ -18,3 +18,22 @@ rtmux() {
 ssh_perlmutter() {
     ~/tools/perlmutter/sshproxy.sh -u dnoll
 }
+
+# Commands on Perlmutter
+work_doubleaecwola () {
+    module load python
+    conda activate perlmutterdnoll
+    cd ~/projects/anomaly_detection/doublecwola/DoubleAECWOLA/
+    source setup.sh
+}
+work_recast_demo () {
+    module load python
+    conda activate perlmutterdnoll
+    cd ~/projects/recast/lhco_cwola/CWoLa-Hunting
+    source setup.sh
+}
+work_haxad () {
+    module load python
+    conda activate permutterdnoll
+    cd ~/projects/anomaly_detection/atlas_analysis_new/code/haxad_demonstrator
+}

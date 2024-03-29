@@ -2,9 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 source ~/.bash_aliases
+source ~/.slurmrc
 
 # beautiful prompt
-PS1='\[\e]0;\w\a\]\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]$(date +%H:%M:%S) \[\033[01;36m\]➤ \[\033[00m\]'
+PS1='\[\e]0;\w\a\]\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \[\033[31m\]$(date +%H:%M:%S) \[\033[01;36m\]> \[\033[00m\]'
 
 
 export SVN_EDITOR=vim
@@ -145,20 +146,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-if [[ $hostname == ml4hep* ]]; then
-    # To use Software Module Farm:
-    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/langs
-    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/tools
-    export MODULEPATH=$MODULEPATH:/global/software/sl-7.x86_64/modfiles/apps
-
-    # To use system locally installed cuda:
-    export PATH=/usr/local/cuda-11.2/bin:$PATH
-    export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64:$LD_LIBRARY_PATH
-
-    # activate conda
-    eval "$(/clusterfs/ml4hep_nvme2/bpnachman/anaconda3/bin/conda shell.bash hook)"
-fi
 
 # activate on lawrencium
 # eval "$(/global/home/users/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
