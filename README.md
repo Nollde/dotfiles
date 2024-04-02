@@ -10,7 +10,7 @@ Dotfiles for personal use. The setup follows [these instructions](https://www.at
 First clone the `dotfiles` repository into your `$HOME` directory and set it up such that the dotfiles can be cloned into the `$HOME` area
 ```bash
 # Clone dotfiles repository
-git clone --bare https://github.com/Nollde/dotfiles.git $HOME/.dotfiles
+git clone --bare git@github.com:Nollde/dotfiles.git $HOME/.dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dotfiles checkout
 ```

@@ -18,6 +18,9 @@ rtmux() {
 ssh_perlmutter() {
     ~/tools/perlmutter/sshproxy.sh -u dnoll
 }
+ssh_lxplus() {
+    kinit -f dnoll@CERN.CH
+}
 
 # Commands on Perlmutter
 work_doubleaecwola () {
