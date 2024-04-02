@@ -4,7 +4,9 @@
 source ~/.bash_aliases
 source ~/.slurmrc
 
-export SVN_EDITOR=vim
+# set default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 # If not running interactively, don't do anything
 case $- in
@@ -113,3 +115,27 @@ if [[ $hostname =~ ^n[0-9]{4}$ ]]; then
     # activate on lawrencium
     eval "$(/global/home/users/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
 fi
+
+# Check if the hostname starts with "lxplus" and /etc/bashrc exists
+if [[ $current_hostname == lxplus* ]] && [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# # Start ssh-agent automatically
+# # Reuse existing ssh-agent or start a new one if necessary
+# SSH_ENV="$HOME/.ssh-agent-thing"
+
+# function start_agent {
+#     echo "Initializing new SSH agent..."
+#     ssh-agent > "${SSH_ENV}"
+#     echo succeeded
+#     chmod 600 "${SSH_ENV}"
+#     . "${SSH_ENV}" > /dev/null
+# }
+
+# if [ -f "${SSH_ENV}" ]; then
+#     . "${SSH_ENV}" > /dev/null
+#     ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || start_agent
+# else
+#     start_agent
+# fi
