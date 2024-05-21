@@ -1,6 +1,24 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+
+# Determine the architecture/cluster
+if [[ $(uname) == "Darwin" ]]; then
+    ENVIRONMENT="macbook"
+elif [[ $HOSTNAME == lxplus* ]]; then
+    ENVIRONMENT="lxplus"
+elif [[ $HOSTNAME == ml4hep* ]]; then
+    ENVIRONMENT="ml4hep"
+elif [[ $HOSTNAME =~ ^login[0-9]+$ ]]; then
+    ENVIRONMENT="perlmutter"
+elif [[ $HOSTNAME =~ ^n[0-9]{4}$ ]]; then
+    ENVIRONMENT="lawrencium"
+else
+    ENVIRONMENT="unknown"
+fi
+
+# Export the variable for use in other scripts
+export ENVIRONMENT
+
 source ~/.bash_aliases
 source ~/.slurmrc
 
@@ -111,13 +129,15 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-if [[ $hostname =~ ^n[0-9]{4}$ ]]; then
-    # activate on lawrencium
-    eval "$(/global/home/users/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
+# activate custom conda installation
+if [[ $ENVIRONMENT == lawrencium ]]; then
+    eval "$(~/tools/miniforge3/bin/conda shell.bash hook)"
+elif [[ $ENVIRONMENT == perlmutter ]]; then
+    eval "$(~/tools/miniforge3/bin/conda shell.bash hook)"
 fi
 
 # Check if the hostname starts with "lxplus" and /etc/bashrc exists
-if [[ $current_hostname == lxplus* ]] && [ -f /etc/bashrc ]; then
+if [[ $ENVIRONMENT == lxplus ]] && [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
@@ -139,3 +159,5 @@ fi
 # else
 #     start_agent
 # fi
+
+eval "$(/global/homes/d/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
