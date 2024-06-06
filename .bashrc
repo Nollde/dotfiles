@@ -141,6 +141,11 @@ if [[ $ENVIRONMENT == lxplus ]] && [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+if [[ $current_hostname == lxplus* ]]; then
+    # activate custom conda env on lxplus
+    eval "$(/afs/cern.ch/user/d/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
+fi
+
 # # Start ssh-agent automatically
 # # Reuse existing ssh-agent or start a new one if necessary
 # SSH_ENV="$HOME/.ssh-agent-thing"
