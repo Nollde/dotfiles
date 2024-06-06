@@ -141,7 +141,7 @@ if [[ $ENVIRONMENT == lxplus ]] && [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-if [[ $current_hostname == lxplus* ]]; then
+if [[ $ENVIRONMENT == lxplus ]]; then
     # activate custom conda env on lxplus
     eval "$(/afs/cern.ch/user/d/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
 fi
@@ -164,5 +164,3 @@ fi
 # else
 #     start_agent
 # fi
-
-eval "$(/global/homes/d/dnoll/tools/miniforge3/bin/conda shell.bash hook)"
