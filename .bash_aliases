@@ -36,9 +36,13 @@ work_recast_demo () {
     source setup.sh
 }
 work_haxad () {
-    module load python
-    conda activate perlmutterdnoll
     cd ~/projects/anomaly_detection/atlas_analysis_new/code/haxad_demonstrator
+    source setup.sh
+}
+
+work_eventgen () {
+    cd ~/projects/anomaly_detection/atlas_analysis_new/code/EventGenDelphes
+    source setup.sh
 }
 
 # Commands on lxplus
@@ -62,4 +66,21 @@ kscreen(){
 
 tunnel () {
     ./tools/vscode/code tunnel
+}
+
+show() {
+    if [ -z "$1" ]; then
+        echo "Usage: show <process_id>"
+        return 1
+    fi
+
+    PID=$1
+    LOG_FILE="/proc/$PID/fd/1"
+
+    if [ ! -e "$LOG_FILE" ]; then
+        echo "Error: Process ID $PID does not exist or does not have a file descriptor 1."
+        return 1
+    fi
+
+    tail -f "$LOG_FILE"
 }
