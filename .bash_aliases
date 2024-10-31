@@ -47,13 +47,21 @@ work_eventgen () {
 
 # Commands on lxplus
 work_mlpf () {
-    cd ~/projects/GlobalParticleFlowStudies/
+    cd ~/projects/agpf/CalibrationHitStudies/build
     setupATLAS
-    cd build
-    asetup Athena,main,latest
+    asetup --restore
+    source ../build/x86*/*setup.sh
     cd ../run/
     echo "Now copy: cp ../athena/GlobalParticleFlow/SubstructureStudies/python/PFRunCalibHitDecorator_PFlowReco_ESDtoAOD_addCPData_mc21.py ."
     echo "Then start: python PFRunCalibHitDecorator_PFlowReco_ESDtoAOD_addCPData_mc21.py"
+}
+work_mcjoboptions () {
+    cd ~/projects/GlobalParticleFlowStudies/
+    setupATLAS
+    cd build
+    asetup 23.6.32,AthGeneration  # For Derivation: Athena,main,latest
+    cd ~/projects/mcjoboptions/generation
+    source setup.sh
 }
 
 kscreen(){
