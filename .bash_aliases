@@ -46,15 +46,31 @@ work_eventgen () {
 }
 
 # Commands on lxplus
-work_mlpf () {
-    cd ~/projects/agpf/CalibrationHitStudies/build
+work_substructure () {
+    cd ~/projects/agpf/CalibrationHitStudies
     setupATLAS
     asetup --restore
-    source ../build/x86*/*setup.sh
-    cd ../run/
-    echo "Now copy: cp ../athena/GlobalParticleFlow/SubstructureStudies/python/PFRunCalibHitDecorator_PFlowReco_ESDtoAOD_addCPData_mc21.py ."
-    echo "Then start: python PFRunCalibHitDecorator_PFlowReco_ESDtoAOD_addCPData_mc21.py"
+    source build/x86*/*setup.sh
+    cd run
+    echo "Now copy: cp ../athena/CalibrationHitStudies/share/run_substructure.py ." 
+    echo "Then start: python run_substructure.py"
 }
+
+work_substructure_workflow () {
+    cd ~/projects/agpf/CalibrationHitStudies/athena/CalibrationHitStudies/workflow/
+    source setup.sh
+}
+
+build_athena () {
+    cd ../build
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE -DATLAS_ENABLE_IDE_HELPERS=TRUE ../athena/Projects/WorkDir
+    make
+    cd ..
+    source build/x86*/setup.sh
+    cd run
+
+}
+
 work_mcjoboptions () {
     cd ~/projects/GlobalParticleFlowStudies/
     setupATLAS
@@ -80,6 +96,8 @@ kscreen(){
 tunnel () {
     ./tools/vscode/code tunnel
 }
+
+alias vinit="voms-proxy-init -voms atlas"
 
 show() {
     if [ -z "$1" ]; then
