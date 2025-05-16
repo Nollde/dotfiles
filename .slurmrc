@@ -1,2 +1,20 @@
 alias skillall="squeue -u \$USER | awk '{print \$1}' | tail -n+2 | xargs scancel"
-alias shistory='sacct -u ${USER} --starttime $(date -d "-1 month" +%Y-%m-%d) --format=User,JobID,Jobname,partition,state,exitcode,time,start,end,elapsed,MaxRss,MaxVMSize,nnodes,ncpus,nodelist'
+alias shistory='sacct -u ${USER} --starttime $(date -d "-1 week" +%Y-%m-%d) --format=User,JobID,Jobname,partition,state,exitcode,time,start,end,elapsed,MaxRss,MaxVMSize,nnodes,ncpus,nodelist'
+alias squeue='squeue --format="%9i %20P %2t %7M %4D %3C %8Q %q" -u $USER'
+
+ssh_to_job() {
+  if [ -z "$1" ]; then
+    echo "Usage: ssh_to_job <jobid>"
+    return 1
+  fi
+
+  local jobid=$1
+  local node=$(squeue -j $jobid -o "%N" -h)
+
+  if [ -z "$node" ]; then
+    echo "No nodes found for job ID $jobid."
+    return 1
+  fi
+
+  ssh $node
+}
