@@ -64,6 +64,11 @@ work_mcjoboptions () {
     source setup.sh
 }
 
+work_flexcast () {
+    cd ~/projects/flexcast/demonstrator
+    source setup.sh
+}
+
 kscreen(){
     if [[ -z "$1" ]]; then #if no argument passed
         k5reauth -f -i 3600 -p dnoll -k /afs/cern.ch/user/d/dnoll/tokens/dnoll.keytab -- screen -D -RR hh
