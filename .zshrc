@@ -108,3 +108,7 @@ unset __conda_setup
 
 # source zsh functions
 source ~/.bash_aliases
+
+# Do pixi stuff
+export PATH=/Users/dnoll/.pixi/bin:$PATH
+eval "$(pixi completion --shell zsh)"
