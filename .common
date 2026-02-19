@@ -133,3 +133,16 @@ show() {
 
     tail -f "$LOG_FILE"
 }
+
+# Export RALPH directory
+if [[ $ENVIRONMENT == macbook ]]; then
+    export RALPH="/Users/nollde/drive/projects/ralph"
+fi
+
+setup_ralph() {
+    mkdir -p scripts/ralph
+    cp $RALPH/CLAUDE.md scripts/ralph/CLAUDE.md
+    chmod +x scripts/ralph/ralph.sh
+    mkdir -p .claude/skills
+    cp -r $RALPH/skills/* .claude/skills/
+}
