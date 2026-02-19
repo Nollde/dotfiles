@@ -1,25 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 
-# Determine the architecture/cluster
-if [[ $(uname) == "Darwin" ]]; then
-    ENVIRONMENT="macbook"
-elif [[ $HOSTNAME == lxplus* ]]; then
-    ENVIRONMENT="lxplus"
-elif [[ $HOSTNAME == ml4hep* ]]; then
-    ENVIRONMENT="ml4hep"
-elif [[ $HOSTNAME =~ ^login[0-9]+$ ]]; then
-    ENVIRONMENT="perlmutter"
-elif [[ $HOSTNAME =~ ^n[0-9]{4}$ ]]; then
-    ENVIRONMENT="lawrencium"
-else
-    ENVIRONMENT="unknown"
-fi
-
-# Export the variable for use in other scripts
-export ENVIRONMENT
-
-source ~/.bash_aliases
+source ~/.common
 source ~/.slurmrc
 
 # set default editor

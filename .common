@@ -1,3 +1,21 @@
+# Determine the architecture/cluster
+if [[ $(uname) == "Darwin" ]]; then
+    ENVIRONMENT="macbook"
+elif [[ $HOSTNAME == lxplus* ]]; then
+    ENVIRONMENT="lxplus"
+elif [[ $HOSTNAME == ml4hep* ]]; then
+    ENVIRONMENT="ml4hep"
+elif [[ $HOSTNAME =~ ^login[0-9]+$ ]]; then
+    ENVIRONMENT="perlmutter"
+elif [[ $HOSTNAME =~ ^n[0-9]{4}$ ]]; then
+    ENVIRONMENT="lawrencium"
+else
+    ENVIRONMENT="unknown"
+fi
+
+# Export the variable for use in other scripts
+export ENVIRONMENT
+
 # some more ls aliases
 alias ls='ls --color=auto'
 alias ll='ls -alF'
@@ -16,7 +34,7 @@ rtmux() {
     ssh $1 -Yt tmux new-session -A -s $2
 }
 ssh_perlmutter() {
-    ~/tools/perlmutter/sshproxy.sh -u dnoll
+    sshproxy -u dnoll -o ~/.ssh/keys/nersc
 }
 ssh_lxplus() {
     kinit -f dnoll@CERN.CH
