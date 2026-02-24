@@ -27,11 +27,12 @@ alias l.='ls -d .* --color=auto'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # rscreen: diretly jump into ssh sessions screen
-rscreen() {
-    ssh $1 -Yt screen -D -RR $2
-}
+# rscreen() {
+#     ssh $1 -Yt screen -D -RR $2
+# }
+# rtmux: directly jump into ssh session's tmux
 rtmux() {
-    ssh $1 -Yt tmux new-session -A -s $2
+    ssh "$1" -Yt tmux new-session -A -s "${2:-main}"
 }
 ssh_perlmutter() {
     sshproxy -u dnoll -o ~/.ssh/keys/nersc
