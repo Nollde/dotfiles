@@ -5,6 +5,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias l.='ls -d .* --color=auto'
 
+alias htop='htop -u dnoll'
+
 # make dotfiles command available everywhere
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -41,7 +43,7 @@ work_haxad () {
 }
 
 work_eventgen () {
-    cd ~/projects/anomaly_detection/atlas_analysis_new/code/EventGenDelphes
+    cd ~/projects/EventGen
     source setup.sh
 }
 
@@ -82,6 +84,11 @@ work_mcjoboptions () {
 
 work_flexcast () {
     cd ~/projects/flexcast/demonstrator
+    source setup.sh
+}
+
+work_gw () {
+    cd ~/projects/gw/cwola
     source setup.sh
 }
 
