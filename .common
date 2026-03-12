@@ -1,3 +1,21 @@
+# Determine the architecture/cluster
+if [[ $(uname) == "Darwin" ]]; then
+    ENVIRONMENT="macbook"
+elif [[ $HOSTNAME == lxplus* ]]; then
+    ENVIRONMENT="lxplus"
+elif [[ $HOSTNAME == ml4hep* ]]; then
+    ENVIRONMENT="ml4hep"
+elif [[ $HOSTNAME =~ ^login[0-9]+$ ]]; then
+    ENVIRONMENT="perlmutter"
+elif [[ $HOSTNAME =~ ^n[0-9]{4}$ ]]; then
+    ENVIRONMENT="lawrencium"
+else
+    ENVIRONMENT="unknown"
+fi
+
+# Export the variable for use in other scripts
+export ENVIRONMENT
+
 # some more ls aliases
 alias ls='ls --color=auto'
 alias ll='ls -alF'
@@ -11,14 +29,15 @@ alias htop='htop -u dnoll'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # rscreen: diretly jump into ssh sessions screen
-rscreen() {
-    ssh $1 -Yt screen -D -RR $2
-}
+# rscreen() {
+#     ssh $1 -Yt screen -D -RR $2
+# }
+# rtmux: directly jump into ssh session's tmux
 rtmux() {
-    ssh $1 -Yt tmux new-session -A -s $2
+    ssh "$1" -Yt tmux new-session -A -s "${2:-main}"
 }
 ssh_perlmutter() {
-    ~/tools/perlmutter/sshproxy.sh -u dnoll
+    sshproxy -u dnoll -o ~/.ssh/keys/nersc
 }
 ssh_lxplus() {
     kinit -f dnoll@CERN.CH
@@ -121,4 +140,17 @@ show() {
     fi
 
     tail -f "$LOG_FILE"
+}
+
+# Export RALPH directory
+if [[ $ENVIRONMENT == macbook ]]; then
+    export RALPH="/Users/nollde/drive/projects/ralph"
+fi
+
+setup_ralph() {
+    mkdir -p scripts/ralph
+    cp $RALPH/CLAUDE.md scripts/ralph/CLAUDE.md
+    chmod +x scripts/ralph/ralph.sh
+    mkdir -p .claude/skills
+    cp -r $RALPH/skills/* .claude/skills/
 }
