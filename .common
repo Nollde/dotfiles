@@ -1,8 +1,12 @@
 # Determine the architecture/cluster
 if [[ "$(uname)" == "Darwin" ]]; then
-    [[ "$USER" == "dnoll" ]] && ENVIRONMENT="macbook_private" \
-    || [[ "$USER" == "nollde" ]] && ENVIRONMENT="macbook_work" \
-    || ENVIRONMENT="macbook"
+    if [[ "$USER" == "dnoll" ]]; then
+        ENVIRONMENT="macbook_private"
+    elif [[ "$USER" == "nollde" ]]; then
+        ENVIRONMENT="macbook_work"
+    else
+        ENVIRONMENT="macbook"
+    fi
 elif [[ $HOSTNAME == lxplus* ]]; then
     ENVIRONMENT="lxplus"
 elif [[ $HOSTNAME == ml4hep* ]]; then
