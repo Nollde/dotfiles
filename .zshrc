@@ -115,7 +115,7 @@ fi
 if [[ $ENVIRONMENT == macbook_private ]]; then
     # activate custom conda env on lxplus
     eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-    export SSH_AUTH_SOCK=/Users/<user>/.bitwarden-ssh-agent.sock
+    export SSH_AUTH_SOCK=/Users/dnoll/.bitwarden-ssh-agent.sock
 fi
 
 # # Do pixi stuff
