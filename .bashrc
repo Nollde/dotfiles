@@ -1,25 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 
-# Determine the architecture/cluster
-if [[ $(uname) == "Darwin" ]]; then
-    ENVIRONMENT="macbook"
-elif [[ $HOSTNAME == lxplus* ]]; then
-    ENVIRONMENT="lxplus"
-elif [[ $HOSTNAME == ml4hep* ]]; then
-    ENVIRONMENT="ml4hep"
-elif [[ $HOSTNAME =~ ^login[0-9]+$ ]]; then
-    ENVIRONMENT="perlmutter"
-elif [[ $HOSTNAME =~ ^n[0-9]{4}$ ]]; then
-    ENVIRONMENT="lawrencium"
-else
-    ENVIRONMENT="unknown"
-fi
-
-# Export the variable for use in other scripts
-export ENVIRONMENT
-
-source ~/.bash_aliases
+source ~/.common
 source ~/.slurmrc
 
 # set default editor
@@ -116,14 +98,14 @@ export PATH
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/global/software/sl-7.x86_64/modules/langs/python/3.6/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/global/homes/d/dnoll/tools/conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/global/software/sl-7.x86_64/modules/langs/python/3.6/etc/profile.d/conda.sh" ]; then
-        . "/global/software/sl-7.x86_64/modules/langs/python/3.6/etc/profile.d/conda.sh"
+    if [ -f "/global/homes/d/dnoll/tools/conda/etc/profile.d/conda.sh" ]; then
+        . "/global/homes/d/dnoll/tools/conda/etc/profile.d/conda.sh"
     else
-        export PATH="/global/software/sl-7.x86_64/modules/langs/python/3.6/bin:$PATH"
+        export PATH="/global/homes/d/dnoll/tools/conda/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -131,8 +113,6 @@ unset __conda_setup
 
 # activate custom conda installation
 if [[ $ENVIRONMENT == lawrencium ]]; then
-    eval "$(~/tools/miniforge3/bin/conda shell.bash hook)"
-elif [[ $ENVIRONMENT == perlmutter ]]; then
     eval "$(~/tools/miniforge3/bin/conda shell.bash hook)"
 fi
 
@@ -164,3 +144,16 @@ fi
 # else
 #     start_agent
 # fi
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/global/u2/d/dnoll/tools/conda/bin/mamba';
+export MAMBA_ROOT_PREFIX='/global/u2/d/dnoll/tools/conda';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<

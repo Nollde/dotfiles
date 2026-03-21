@@ -1,3 +1,6 @@
+# Source common configuration
+source ~/.common
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -92,14 +95,14 @@ source $ZSH/oh-my-zsh.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/dnoll/tools/miniforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/nollde/tools/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/dnoll/tools/miniforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/dnoll/tools/miniforge/etc/profile.d/conda.sh"
+    if [ -f "/Users/nollde/tools/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/nollde/tools/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/dnoll/tools/miniforge/bin:$PATH"
+        export PATH="/Users/nollde/tools/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -109,11 +112,28 @@ if [ -f "/Users/dnoll/tools/miniforge/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
-if [[ $ENVIRONMENT == macbook ]]; then
+if [[ $ENVIRONMENT == macbook_private ]]; then
     # activate custom conda env on lxplus
     eval "$(/opt/homebrew/bin/brew shellenv zsh)"
     export SSH_AUTH_SOCK=/Users/<user>/.bitwarden-ssh-agent.sock
 fi
+
+# # Do pixi stuff
+# export PATH=/Users/dnoll/.pixi/bin:$PATH
+# eval "$(pixi completion --shell zsh)"
+
+# # >>> mamba initialize >>>
+# # !! Contents within this block are managed by 'mamba shell init' !!
+# export MAMBA_EXE='/Users/nollde/tools/miniforge3/bin/mamba';
+# export MAMBA_ROOT_PREFIX='/Users/nollde/tools/miniforge3';
+# __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__mamba_setup"
+# else
+#     alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+# fi
+# unset __mamba_setup
+# # <<< mamba initialize <<<
 
 # source zsh functions
 source ~/.bash_aliases
