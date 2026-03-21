@@ -59,7 +59,6 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
-    fast-syntax-highlighting
     # zsh-autocomplete
 )
 
@@ -93,18 +92,28 @@ source $ZSH/oh-my-zsh.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/dnoll/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/dnoll/tools/miniforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/dnoll/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/dnoll/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/dnoll/tools/miniforge/etc/profile.d/conda.sh" ]; then
+        . "/Users/dnoll/tools/miniforge/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/dnoll/anaconda3/bin:$PATH"
+        export PATH="/Users/dnoll/tools/miniforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
+
+if [ -f "/Users/dnoll/tools/miniforge/etc/profile.d/mamba.sh" ]; then
+    . "/Users/dnoll/tools/miniforge/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
+
+if [[ $ENVIRONMENT == macbook ]]; then
+    # activate custom conda env on lxplus
+    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+    export SSH_AUTH_SOCK=/Users/<user>/.bitwarden-ssh-agent.sock
+fi
 
 # source zsh functions
 source ~/.bash_aliases
