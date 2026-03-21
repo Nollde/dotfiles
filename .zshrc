@@ -134,6 +134,3 @@ fi
 # fi
 # unset __mamba_setup
 # # <<< mamba initialize <<<
-
-# source zsh functions
-source ~/.bash_aliases
