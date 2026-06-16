@@ -1,6 +1,12 @@
 # Determine the architecture/cluster
-if [[ $(uname) == "Darwin" ]]; then
-    ENVIRONMENT="macbook"
+if [[ "$(uname)" == "Darwin" ]]; then
+    if [[ "$USER" == "dnoll" ]]; then
+        ENVIRONMENT="macbook_private"
+    elif [[ "$USER" == "nollde" ]]; then
+        ENVIRONMENT="macbook_work"
+    else
+        ENVIRONMENT="macbook"
+    fi
 elif [[ $HOSTNAME == lxplus* ]]; then
     ENVIRONMENT="lxplus"
 elif [[ $HOSTNAME == ml4hep* ]]; then
@@ -22,6 +28,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias l.='ls -d .* --color=auto'
+
+alias htop='htop -u dnoll'
 
 # make dotfiles command available everywhere
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -60,7 +68,7 @@ work_haxad () {
 }
 
 work_eventgen () {
-    cd ~/projects/anomaly_detection/atlas_analysis_new/code/EventGenDelphes
+    cd ~/projects/EventGen
     source setup.sh
 }
 
@@ -104,6 +112,11 @@ work_flexcast () {
     source setup.sh
 }
 
+work_gw () {
+    cd ~/projects/gw/cwola
+    source setup.sh
+}
+
 kscreen(){
     if [[ -z "$1" ]]; then #if no argument passed
         k5reauth -f -i 3600 -p dnoll -k /afs/cern.ch/user/d/dnoll/tokens/dnoll.keytab -- screen -D -RR hh
@@ -136,7 +149,7 @@ show() {
 }
 
 # Export RALPH directory
-if [[ $ENVIRONMENT == macbook ]]; then
+if [[ $ENVIRONMENT == macbook_work ]]; then
     export RALPH="/Users/nollde/drive/projects/ralph"
 fi
 

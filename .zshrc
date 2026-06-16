@@ -62,7 +62,6 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
-    fast-syntax-highlighting
     # zsh-autocomplete
 )
 
@@ -107,21 +106,31 @@ else
     fi
 fi
 unset __conda_setup
+
+if [ -f "/Users/dnoll/tools/miniforge/etc/profile.d/mamba.sh" ]; then
+    . "/Users/dnoll/tools/miniforge/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
+
+if [[ $ENVIRONMENT == macbook_private ]]; then
+    # activate custom conda env on lxplus
+    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+    export SSH_AUTH_SOCK=/Users/dnoll/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+fi
 
 # # Do pixi stuff
 # export PATH=/Users/dnoll/.pixi/bin:$PATH
 # eval "$(pixi completion --shell zsh)"
 
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE='/Users/nollde/tools/miniforge3/bin/mamba';
-export MAMBA_ROOT_PREFIX='/Users/nollde/tools/miniforge3';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
+# # >>> mamba initialize >>>
+# # !! Contents within this block are managed by 'mamba shell init' !!
+# export MAMBA_EXE='/Users/nollde/tools/miniforge3/bin/mamba';
+# export MAMBA_ROOT_PREFIX='/Users/nollde/tools/miniforge3';
+# __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__mamba_setup"
+# else
+#     alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+# fi
+# unset __mamba_setup
+# # <<< mamba initialize <<<
