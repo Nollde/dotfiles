@@ -160,3 +160,12 @@ setup_ralph() {
     mkdir -p .claude/skills
     cp -r $RALPH/skills/* .claude/skills/
 }
+
+if [[ $ENVIRONMENT == perlmutter ]]; then
+    export GROUP="m3246"
+    get_node() {
+        local constraint="${1:-cpu}"
+        local hours="${2:-1}"
+        salloc --nodes 1 --qos interactive --constraint "$constraint" --time "${hours}:00:00" --account $GROUP
+    }
+fi
