@@ -63,7 +63,7 @@ work_recast_demo () {
     source setup.sh
 }
 work_haxad () {
-    cd ~/projects/anomaly_detection/atlas_analysis_new/code/haxad_demonstrator
+    cd /global/homes/d/dnoll/projects/anomaly_detection/haxad/code/haxad_demonstrator
     source setup.sh
 }
 
@@ -166,6 +166,7 @@ if [[ $ENVIRONMENT == perlmutter ]]; then
     get_node() {
         local constraint="${1:-cpu}"
         local hours="${2:-1}"
-        salloc --nodes 1 --qos interactive --constraint "$constraint" --time "${hours}:00:00" --account $GROUP
+        local qos="${3:-interactive}"
+        salloc --nodes 1 --qos "$qos" --constraint "$constraint" --time "${hours}:00:00" --account $GROUP
     }
 fi
